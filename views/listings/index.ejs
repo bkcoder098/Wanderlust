@@ -1,0 +1,180 @@
+<% layout("/layouts/boilerplate") -%>
+
+<%= success %>
+
+
+  <style>
+    .filters {
+      display: flex;
+      gap: 15px;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap; /* Allow wrapping for medium and large screens */
+    }
+  
+    #filter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      min-width: 80px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+  
+    #filter:hover {
+      transform: scale(1.1);
+    }
+  
+    #filter div {
+      font-size: 24px;
+    }
+  
+    #filter p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+  
+    /* Small screens (mobile) */
+    @media (max-width: 600px) {
+      .filters {
+        flex-wrap: nowrap; /* Prevent wrapping for horizontal scroll */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        justify-content: flex-start; /* Align items to the start */
+        padding: 10px 5px; /* Reduce padding for small screens */
+      }
+  
+      #filter {
+        min-width: 70px; /* Slightly reduce min-width for small screens */
+      }
+    }
+  
+    /* Medium screens (tablets) */
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .filters {
+        gap: 10px; /* Reduce gap for medium screens */
+      }
+  
+      #filter {
+        flex: 1 1 calc(33.33% - 20px); /* 3 items per row with spacing */
+        max-width: calc(33.33% - 20px); /* Limit width for 3 items per row */
+      }
+    }
+  
+    /* Large screens (desktops) */
+    @media (min-width: 1025px) {
+      .filters {
+        gap: 20px; /* Increase gap for large screens */
+        justify-content: space-around; /* Evenly space items */
+      }
+  
+      #filter {
+        flex: 1 1 auto; /* Allow items to grow and shrink */
+        max-width: 120px; /* Limit max width for better spacing */
+      }
+    }
+
+    .tax-info{
+      display:none;
+    }
+
+    .tax-toggle{
+      border:1px solid black;
+      border-radius:10px;
+      padding:1rem;
+    }
+  </style>
+  
+
+
+  <div class="filters mt-2">
+    <div id="filter">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </div>
+    <div id="filter">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </div>
+    <div id="filter">
+      <div><i class="fa-solid fa-mountain-city"></i></div>
+      <p>Iconics</p>
+    </div>
+    <div id="filter">
+      <div><i class="fa-solid fa-mountain"></i></div>
+      <p>Mountains</p>
+    </div>
+    <div id="filter">
+      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <p>Castles</p>
+    </div>
+    <div id="filter">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Amazing Pools</p>
+    </div>
+    <div id="filter">
+      <div><i class="fa-solid fa-campground"></i></div>
+      <p>Campings</p>
+    </div>
+    <div id="filter">
+      <div><i class="fa-solid fa-cow"></i></div>
+      <p>Farms</p>
+    </div>
+    <div id="filter">
+      <div><i class="fa-solid fa-snowflake"></i></div>
+      <p>Arctics </p>
+    </div>
+
+    <div class="tax-toggle">
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label" for="flexSwitchCheckDefault">Display total taxes </label>
+    </div>
+    </div>
+
+  </div>
+    <!-- <form method="GET" action="/listings/new">
+        <button>Create New Listing </button>
+    </form> -->
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
+    <% for(let listing of allListings){ %>
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+    <div class="card col  listings-card " >
+        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing-image" style="height: 20rem;">
+        <div class=" card-img-overlay"> <b><%=listing.location %> WL</b> </div>
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= listing.title %></b>
+            <br>
+            
+            <% if (listing.price != null) { %>
+              &#8377;<%= listing.price.toLocaleString("en-IN")%>/Night
+              <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+          <% } else { %>
+              Price not available
+          <% } %>
+
+          </p>
+        </div>
+      </div>
+    </a>
+      <% } %>
+    </div>
+    
+
+    <script> 
+      let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+      taxSwitch.addEventListener("click",()=>{
+       let taxInfo = document.getElementsByClassName("tax-info");
+       for(info of taxInfo){
+        if( info.style.display !="inline"){
+          info.style.display = "inline";
+          } else {
+            info.style.display ="none";
+          } 
+       }
+      });
+    </script>
+
