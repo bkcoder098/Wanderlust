@@ -19,7 +19,11 @@
 </head>
 <body>
     
-    <%- include("../includes/navbar.ejs") %>
+    <!-- <%- include("../includes/navbar.ejs") %> -->
+     <%- include("../includes/navbar.ejs", { currUser: typeof currUser !== "undefined" ? currUser : null }) %>
+
+     
+
 
     <div class="container">
 
