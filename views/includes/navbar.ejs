@@ -76,12 +76,11 @@
 
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new"><b>Add New Apartment </b> </a>
-        <% if (currUser) { %>
-        <a class="nav-link" href="/logout"><b>Log out</b></a>
-        <% } else { %>
-        <a class="nav-link active" href="/signup"><b>Sign Up? </b></a>
-        <a class="nav-link" href="/login"><b>Log In</b></a>
-        <% } %> <% if(currUser) { %>
+        <% if(!currUser) { %>
+               <a class="nav-link active" href="/signup"><b>Sign Up? </b></a>
+               <a class="nav-link" href="/login"><b>Log In</b></a>
+             <% } %> 
+        <% if(currUser) { %>
         <a class="nav-link" href="/logout"><b>Log out</b></a>
         <%}%>
       </div>
