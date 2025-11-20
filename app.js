@@ -22,7 +22,7 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 
-// let MONGO_URL = "mongodb://127.0.0.1:27017/WanderLust";
+// let MONGO_URL = "mongodb://127.0.0.1:27017/WanderLust";     
 const dbUrl = process.env.ATLASDB_URL;
 
 
@@ -138,3 +138,6 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
 });
+
+
+//all good
